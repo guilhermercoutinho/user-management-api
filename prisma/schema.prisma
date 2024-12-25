@@ -1,0 +1,36 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId // Identificador único gerado automaticamente
+  nome         String
+  cpf          String   @unique
+  email        String   @unique
+  telefone     String
+  endereco     Endereco
+  genero       String?
+  foto         String? // URL ou caminho da foto
+  criadoEm     DateTime @default(now())
+  atualizadoEm DateTime @updatedAt
+}
+
+type Endereco {
+  cep    String
+  rua    String
+  numero String
+  bairro String
+  cidade String
+  estado String // Novo campo para armazenar o estado
+}
