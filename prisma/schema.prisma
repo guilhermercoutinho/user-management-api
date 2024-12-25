@@ -14,16 +14,16 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId // Identificador único gerado automaticamente
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId // Identificador único gerado automaticamente
   nome         String
-  cpf          String   @unique
-  email        String   @unique
-  telefone     String
-  endereco     Endereco
+  cpf          String?   @unique
+  email        String?   @unique
+  telefone     String?
+  endereco     Endereco?
   genero       String?
   foto         String? // URL ou caminho da foto
-  criadoEm     DateTime @default(now())
-  atualizadoEm DateTime @updatedAt
+  criadoEm     DateTime  @default(now())
+  atualizadoEm DateTime  @updatedAt
 }
 
 type Endereco {
